@@ -8,13 +8,13 @@ num_of_agents = 100; % ***INPUT-VARIABLE*** total 100 agents in the system, each
 
 num_of_dimensions = 2;% ***INPUT-VARIABLE*** number of binary values in one state(x,y,z,...)
 
-times_runs = 50; % ***INPUT-VARIABLE***
-times_iteration = 2000; % ***INPUT-VARIABLE***
+times_runs = 5; % ***INPUT-VARIABLE***
+times_iteration = 200; % ***INPUT-VARIABLE***
 
 %% flag
 flag_initial = 0; % 0: random; 1: totally ignorant; 2: singleton; 3: half-divided.
 
-flag_pooling = 1; % 0: without pooling; 1: with pooling.
+flag_pooling = 0; % 0: without pooling; 1: with pooling.
 flag_poolingOperator = 0; % 0: max Similarity; 1: min Similarity; 2: average Similarity.
 
 flag_updating = 1; % 0: without evidential updating; 1: with evidential updating.
@@ -25,7 +25,7 @@ flag_dynamic = 0; % 0: static environment True state do not change; 1: dynamic e
 if flag_dynamic == 0
     T = ones(1,num_of_dimensions); % True state we assumed
 end
-%% display of Process operator
+%% display of Process operator (show in graphs)
 if flag_initial == 0
     ope1 = "Random, ";
 end
@@ -69,6 +69,7 @@ operator = ope1 + ope2 + ope3;
 %% heatmap loop
 
 r = 1 : -0.2 : 0; % ***INPUT-VARIABLE*** evidence rate
+r(6) = 0.01;
 epsilon = 0 : 0.1 : 0.5; % ***INPUT-VARIABLE*** noise rate
 % 6 * 6 heatmap
 heat_Hsim = zeros(6);
@@ -314,22 +315,22 @@ end
 
 figure(1);
 set(gcf,'position',[50,250,500,500]);
-heatmap(epsilon,r,heat_Hsim)
+heatmap(epsilon,r,heat_Hsim')
 xlabel("Noise rate")
 ylabel("Evidence rate")
-title( { ['Heatmap of Avr Similarity',],operator,['Number of agents = ', num2str(num_of_agents),...
+title( { ['Heatmap of Avr Similarity(B, T)',],operator,['Number of agents = ', num2str(num_of_agents),...
     ', Dimension = ',num2str(num_of_dimensions)],...
     ['Iteration = ', num2str(times_iteration),...
     ', Runs = ', num2str(times_runs) ]})
 
 figure(2);
 set(gcf,'position',[550,250,500,500]);
-heatmap(epsilon,r,heat_times_avr)
+heatmap(epsilon,r,heat_times_avr')
 xlabel("Noise rate")
 ylabel("Evidence rate")
 title( { ['Heatmap of Avr Convergence Times',],operator,['Number of agents = ', num2str(num_of_agents),...
     ', Dimension = ',num2str(num_of_dimensions)],...
-    ['Iteration = ', num2str(times_iteration),...
+    ['Iterations = ', num2str(times_iteration),...
     ', Runs = ', num2str(times_runs) ]})
 
 toc
