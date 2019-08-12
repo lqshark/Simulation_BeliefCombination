@@ -20,8 +20,6 @@ epsilon = 0 : 0.1 : 0.5; % ***INPUT-VARIABLE*** noise rate
 % 6 * 6 heatmap
 heat_Hsim = zeros(6);
 heat_convTimes = zeros(6);
-for i_heatcol = 1 : 6
-    for i_heatrow = 1 : 6
 
 
 
@@ -200,8 +198,7 @@ end
 
 
 heat_Hsim(i_heatrow, i_heatcol) = mean(Hsim(:));
-    end
-end
+
 % operator = operator + " + Delete";
 operator = operator + " + Modify";
 heatmap(epsilon,r,heat_Hsim)
@@ -212,161 +209,161 @@ title( { ['Avr Similarity',', Initial: Random'],operator,['Number of agents = ',
     ['Inside iterative times = ', num2str(times_inside),...
     ', Outside iterative times = ', num2str(times_outside) ]})
 
-% %% figure 1: cardinality curves overlap
-% counter_plot = 0:(times_inside-1);
-% for i_plot = 1:times_outside
-%     figure(1);
-%     set(gcf,'position',[50,250,500,500]);
-%     % figure('position',[200,200,500,500]);
-%     plot(counter_plot,cardinality(i_plot,:))
-%     ylim([0 5]) % d = 2
-%     % ylim([0 10]) % d = 3
-%     % ylim([0 20]) % d = 4
-%     % ylim([0 35]) % d = 5
-%     % ylim([0 1030]) % d = 10
-%     xlabel('Number of iterative times');
-%     ylabel('Average cardinality');
-%     hold on
-% end
-% set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
-% title( { ['Number of agents = ', num2str(num_of_agents),...
-%     ', Dimension = ',num2str(num_of_dimensions),...
-%     ', Evidence rate = ',num2str(r),...
-%     ', Noise rate = ',num2str(epsilon),],...
-%     ['Inside iterative times = ', num2str(times_inside),...
-%     ', Outside iterative times = ', num2str(times_outside) ]})
-% 
-% 
-% for i_EB = 1:times_inside
-% cardinality_avr(i_EB) = mean(cardinality(:,i_EB));
-% cardinality_var(i_EB) = var(cardinality(:,i_EB));
-% end
-% k = 1;
-% for i_sample = 1:50:times_inside
-%     cardinality_avr_EB(k) = cardinality_avr(i_sample);
-%     cardinality_var_EB(k) = cardinality_var(i_sample);
-%     counter_plot_EB(k) = counter_plot(i_sample);
-%     k = k+1;
-% end
-% cardinality_avr_EB(k) = cardinality_avr(times_inside);
-% cardinality_var_EB(k) = cardinality_var(times_inside);
-% counter_plot_EB(k) = counter_plot(times_inside);
-% %% figure 2: avr cardinality with errorbar
-% figure(2);
-% set(gcf,'position',[550,250,500,500]);
-% errorbar(counter_plot_EB, cardinality_avr_EB, cardinality_var_EB)
-% ylim([0 5]) % d = 2
-% % ylim([0 10]) % d = 3
-% % ylim([0 20]) % d = 4
-% % ylim([0 35]) % d = 5
-% % ylim([0 1030]) % d = 10
-% 
-% xlabel('Number of iterative times');
-% ylabel('Average cardinality');
-% set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
-% title( { ['Number of agents = ', num2str(num_of_agents),...
-%     ', Dimension = ',num2str(num_of_dimensions),...
-%     ', Evidence rate = ',num2str(r),...
-%     ', Noise rate = ',num2str(epsilon),],...
-%     ['Inside iterative times = ', num2str(times_inside),...
-%     ', Outside iterative times = ', num2str(times_outside) ]})
-% 
-% 
-% %% figure 3: cardinality curves overlap
-% for i_plot2 = 1:times_outside
-%     figure(3);
-%     set(gcf,'position',[50,250,500,500]);
-%     % figure('position',[200,200,500,500]);
-%     plot(counter_plot,Hsim(i_plot2,:))
-%     ylim([0 2]) 
-% 
-%     xlabel('Number of iterative times');
-%     ylabel('Average similarity(B, T)');
-%     hold on
-% end
-% set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
-% title( { ['Number of agents = ', num2str(num_of_agents),...
-%     ', Dimension = ',num2str(num_of_dimensions),...
-%     ', Evidence rate = ',num2str(r),...
-%     ', Noise rate = ',num2str(epsilon),],...
-%     ['Inside iterative times = ', num2str(times_inside),...
-%     ', Outside iterative times = ', num2str(times_outside) ]})
-% 
-% 
-% for i_EB2 = 1:times_inside
-% Hsim_avr(i_EB2) = mean(Hsim(:,i_EB2));
-% Hsim_var(i_EB2) = var(Hsim(:,i_EB2));
-% end
-% k = 1;
-% for i_sample2 = 1:50:times_inside
-%     Hsim_avr_EB(k) = Hsim_avr(i_sample2);
-%     Hsim_var_EB(k) = Hsim_var(i_sample2);
-%     counter_plot_EB(k) = counter_plot(i_sample2);
-%     k = k+1;
-% end
-% Hsim_avr_EB(k) = Hsim_avr(times_inside);
-% Hsim_var_EB(k) = Hsim_var(times_inside);
-% counter_plot_EB(k) = counter_plot(times_inside);
-% 
-% %% figure 4: avr cardinality with errorbar
-% figure(4);
-% set(gcf,'position',[550,250,500,500]);
-% errorbar(counter_plot_EB, Hsim_avr_EB, Hsim_var_EB)
-% ylim([0 2]) 
-% 
-% xlabel('Number of iterative times');
-% ylabel('Average similarity(B, T)');
-% set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
-% title( { ['Number of agents = ', num2str(num_of_agents),...
-%     ', Dimension = ',num2str(num_of_dimensions),...
-%     ', Evidence rate = ',num2str(r),...
-%     ', Noise rate = ',num2str(epsilon),],...
-%     ['Inside iterative times = ', num2str(times_inside),...
-%     ', Outside iterative times = ', num2str(times_outside) ]})
-% 
-% %% figure 5: histogram of result frequency(final graph)
-% figure(5);
-% set(gcf,'position',[1050,250,500,500]);
-% 
-% % result analysis
-% uni_result{1} = result{1};
-% j = 1;
-% count_uni = ones(1, times_outside); 
-% for i = 2 : times_outside
-%     flag = 0;
-%     for i_j = 1 : j
-%         if (result{i} == uni_result{i_j})
-%             count_uni(i_j) = count_uni(i_j) + 1;
-%             flag = 1;
-%             break;
-%         end
-%     end
-%     if (flag == 0)
-%         j = j + 1;
-%         uni_result{j} = result{i};
-%     end
-% end
-% label = cell(length(uni_result), 1);
-% b=bar(count_uni(1: j));
-% grid on;
-% for i_label = 1 : length(uni_result)
-%     if uni_result{i_label} == [-1, -1]
-%         label{i_label} = "[notConv]"; % represent not converging
-%                                       % in given combining times.
-%     else
-%         label{i_label} = "["+ num2str(uni_result{i_label})+"]";
-%     end
-% end
-% xticklabels(label);
-% xlabel('possible results');
-% ylabel('frequency');
-% set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
-% title( { ['Number of agents = ', num2str(num_of_agents),...
-%     ', Dimension = ',num2str(num_of_dimensions),...
-%     ', Evidence rate = ',num2str(r),...
-%     ', Noise rate = ',num2str(epsilon),],...
-%     ['Inside iterative times = ', num2str(times_inside),...
-%     ', Outside iterative times = ', num2str(times_outside) ]})
+%% figure 1: cardinality curves overlap
+counter_plot = 0:(times_inside-1);
+for i_plot = 1:times_outside
+    figure(1);
+    set(gcf,'position',[50,250,500,500]);
+    % figure('position',[200,200,500,500]);
+    plot(counter_plot,cardinality(i_plot,:))
+    ylim([0 5]) % d = 2
+    % ylim([0 10]) % d = 3
+    % ylim([0 20]) % d = 4
+    % ylim([0 35]) % d = 5
+    % ylim([0 1030]) % d = 10
+    xlabel('Number of iterative times');
+    ylabel('Average cardinality');
+    hold on
+end
+set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
+title( { ['Number of agents = ', num2str(num_of_agents),...
+    ', Dimension = ',num2str(num_of_dimensions),...
+    ', Evidence rate = ',num2str(r),...
+    ', Noise rate = ',num2str(epsilon),],...
+    ['Inside iterative times = ', num2str(times_inside),...
+    ', Outside iterative times = ', num2str(times_outside) ]})
+
+
+for i_EB = 1:times_inside
+cardinality_avr(i_EB) = mean(cardinality(:,i_EB));
+cardinality_var(i_EB) = var(cardinality(:,i_EB));
+end
+k = 1;
+for i_sample = 1:50:times_inside
+    cardinality_avr_EB(k) = cardinality_avr(i_sample);
+    cardinality_var_EB(k) = cardinality_var(i_sample);
+    counter_plot_EB(k) = counter_plot(i_sample);
+    k = k+1;
+end
+cardinality_avr_EB(k) = cardinality_avr(times_inside);
+cardinality_var_EB(k) = cardinality_var(times_inside);
+counter_plot_EB(k) = counter_plot(times_inside);
+%% figure 2: avr cardinality with errorbar
+figure(2);
+set(gcf,'position',[550,250,500,500]);
+errorbar(counter_plot_EB, cardinality_avr_EB, cardinality_var_EB)
+ylim([0 5]) % d = 2
+% ylim([0 10]) % d = 3
+% ylim([0 20]) % d = 4
+% ylim([0 35]) % d = 5
+% ylim([0 1030]) % d = 10
+
+xlabel('Number of iterative times');
+ylabel('Average cardinality');
+set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
+title( { ['Number of agents = ', num2str(num_of_agents),...
+    ', Dimension = ',num2str(num_of_dimensions),...
+    ', Evidence rate = ',num2str(r),...
+    ', Noise rate = ',num2str(epsilon),],...
+    ['Inside iterative times = ', num2str(times_inside),...
+    ', Outside iterative times = ', num2str(times_outside) ]})
+
+
+%% figure 3: cardinality curves overlap
+for i_plot2 = 1:times_outside
+    figure(3);
+    set(gcf,'position',[50,250,500,500]);
+    % figure('position',[200,200,500,500]);
+    plot(counter_plot,Hsim(i_plot2,:))
+    ylim([0 2]) 
+
+    xlabel('Number of iterative times');
+    ylabel('Average similarity(B, T)');
+    hold on
+end
+set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
+title( { ['Number of agents = ', num2str(num_of_agents),...
+    ', Dimension = ',num2str(num_of_dimensions),...
+    ', Evidence rate = ',num2str(r),...
+    ', Noise rate = ',num2str(epsilon),],...
+    ['Inside iterative times = ', num2str(times_inside),...
+    ', Outside iterative times = ', num2str(times_outside) ]})
+
+
+for i_EB2 = 1:times_inside
+Hsim_avr(i_EB2) = mean(Hsim(:,i_EB2));
+Hsim_var(i_EB2) = var(Hsim(:,i_EB2));
+end
+k = 1;
+for i_sample2 = 1:50:times_inside
+    Hsim_avr_EB(k) = Hsim_avr(i_sample2);
+    Hsim_var_EB(k) = Hsim_var(i_sample2);
+    counter_plot_EB(k) = counter_plot(i_sample2);
+    k = k+1;
+end
+Hsim_avr_EB(k) = Hsim_avr(times_inside);
+Hsim_var_EB(k) = Hsim_var(times_inside);
+counter_plot_EB(k) = counter_plot(times_inside);
+
+%% figure 4: avr cardinality with errorbar
+figure(4);
+set(gcf,'position',[550,250,500,500]);
+errorbar(counter_plot_EB, Hsim_avr_EB, Hsim_var_EB)
+ylim([0 2]) 
+
+xlabel('Number of iterative times');
+ylabel('Average similarity(B, T)');
+set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
+title( { ['Number of agents = ', num2str(num_of_agents),...
+    ', Dimension = ',num2str(num_of_dimensions),...
+    ', Evidence rate = ',num2str(r),...
+    ', Noise rate = ',num2str(epsilon),],...
+    ['Inside iterative times = ', num2str(times_inside),...
+    ', Outside iterative times = ', num2str(times_outside) ]})
+
+%% figure 5: histogram of result frequency(final graph)
+figure(5);
+set(gcf,'position',[1050,250,500,500]);
+
+% result analysis
+uni_result{1} = result{1};
+j = 1;
+count_uni = ones(1, times_outside); 
+for i = 2 : times_outside
+    flag = 0;
+    for i_j = 1 : j
+        if (result{i} == uni_result{i_j})
+            count_uni(i_j) = count_uni(i_j) + 1;
+            flag = 1;
+            break;
+        end
+    end
+    if (flag == 0)
+        j = j + 1;
+        uni_result{j} = result{i};
+    end
+end
+label = cell(length(uni_result), 1);
+b=bar(count_uni(1: j));
+grid on;
+for i_label = 1 : length(uni_result)
+    if uni_result{i_label} == [-1, -1]
+        label{i_label} = "[notConv]"; % represent not converging
+                                      % in given combining times.
+    else
+        label{i_label} = "["+ num2str(uni_result{i_label})+"]";
+    end
+end
+xticklabels(label);
+xlabel('possible results');
+ylabel('frequency');
+set(get(gca,'title'),'FontSize',10,'FontWeight','normal')
+title( { ['Number of agents = ', num2str(num_of_agents),...
+    ', Dimension = ',num2str(num_of_dimensions),...
+    ', Evidence rate = ',num2str(r),...
+    ', Noise rate = ',num2str(epsilon),],...
+    ['Inside iterative times = ', num2str(times_inside),...
+    ', Outside iterative times = ', num2str(times_outside) ]})
 
 
 toc

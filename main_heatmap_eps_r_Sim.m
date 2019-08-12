@@ -6,19 +6,19 @@ tic
 num_of_agents = 100; % ***INPUT-VARIABLE*** total 100 agents in the system, each agent has
 % one belief a1={};a2={};...;a100={}.
 
-num_of_dimensions = 2;% ***INPUT-VARIABLE*** number of binary values in one state(x,y,z,...)
+num_of_dimensions = 10;% ***INPUT-VARIABLE*** number of binary values in one state(x,y,z,...)
 
-times_runs = 5; % ***INPUT-VARIABLE***
-times_iteration = 200; % ***INPUT-VARIABLE***
+times_runs = 50; % ***INPUT-VARIABLE***
+times_iteration = 2000; % ***INPUT-VARIABLE***
 
 %% flag
-flag_initial = 0; % 0: random; 1: totally ignorant; 2: singleton; 3: half-divided.
+flag_initial = 1; % 0: random; 1: totally ignorant; 2: singleton; 3: half-divided.
 
 flag_pooling = 0; % 0: without pooling; 1: with pooling.
 flag_poolingOperator = 0; % 0: max Similarity; 1: min Similarity; 2: average Similarity.
 
 flag_updating = 1; % 0: without evidential updating; 1: with evidential updating.
-flag_updatingOperator = 0; % 0: Delete operator; 1: Modify operator.
+flag_updatingOperator = 1; % 0: Delete operator; 1: Modify operator.
 
 flag_dynamic = 0; % 0: static environment True state do not change; 1: dynamic environment.
 %% true state
@@ -320,7 +320,7 @@ xlabel("Noise rate")
 ylabel("Evidence rate")
 title( { ['Heatmap of Avr Similarity(B, T)',],operator,['Number of agents = ', num2str(num_of_agents),...
     ', Dimension = ',num2str(num_of_dimensions)],...
-    ['Iteration = ', num2str(times_iteration),...
+    ['Iterations = ', num2str(times_iteration),...
     ', Runs = ', num2str(times_runs) ]})
 
 figure(2);
