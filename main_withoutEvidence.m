@@ -6,18 +6,18 @@ tic
 num_of_agents = 100; % ***INPUT-VARIABLE*** total 100 agents in the system, each agent has
 % one belief a1={};a2={};...;a100={}.
 
-num_of_dimensions = 5;% ***INPUT-VARIABLE*** number of binary values in one state(x,y,z,...)
+num_of_dimensions = 6;% ***INPUT-VARIABLE*** number of binary values in one state(x,y,z,...)
 
 times_runs = 100; % ***INPUT-VARIABLE***
-times_iteration = 3000; % ***INPUT-VARIABLE***
+times_iteration = 2000; % ***INPUT-VARIABLE***
 
 r = 0.1; % ***INPUT-VARIABLE*** evidence rate
 epsilon = 0.1; % ***INPUT-VARIABLE*** noise rate
 %% flag
-flag_initial = 0; % 0: random; 1: totally ignorant; 2: singleton; 3: half-divided.
+flag_initial = 3; % 0: random; 1: totally ignorant; 2: singleton; 3: half-divided.
 
 flag_pooling = 1; % 0: without pooling; 1: with pooling.
-flag_poolingOperator = 1; % 0: max Similarity; 1: min Similarity; 2: average Similarity.
+flag_poolingOperator = 0; % 0: max Similarity; 1: min Similarity; 2: average Similarity.
 
 flag_updating = 0; % 0: without evidential updating; 1: with evidential updating.
 flag_updatingOperator = 0; % 0: Delete operator; 1: Modify operator.
@@ -447,7 +447,7 @@ count_uni = ones(1, times_runs);
 for i = 2 : times_runs
     flag = 0;
     for i_j = 1 : j
-        if (result{i} == uni_result{i_j})
+        if (isequal(result{i}, uni_result{i_j}))
             count_uni(i_j) = count_uni(i_j) + 1;
             flag = 1;
             break;

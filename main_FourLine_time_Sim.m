@@ -6,7 +6,7 @@ tic
 num_of_agents = 100; % ***INPUT-VARIABLE*** total 100 agents in the system, each agent has
 % one belief a1={};a2={};...;a100={}.
 
-num_of_dimensions = 2;% ***INPUT-VARIABLE*** number of binary values in one state(x,y,z,...)
+num_of_dimensions = 5;% ***INPUT-VARIABLE*** number of binary values in one state(x,y,z,...)
 
 times_runs = 50; % ***INPUT-VARIABLE***
 times_iteration = 2000; % ***INPUT-VARIABLE***
